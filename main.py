@@ -38,13 +38,20 @@ def main():
         
     print("\n✅ Pipeline executado com sucesso!")
 
-    # 5. O Diferencial: Explicação com LLM (GenAI)
-    print("\n[5/5] Testando o diferencial com Google Gemini...")
+    # 5. Explicação com LLM
+    print("\n[5/5] criando laudo com o Google Gemini...")
     
     # Simulando um SMS que o modelo tradicional barrou
     sms_suspeito = "URGENT! Your bank account has been locked. Click here to verify your details: http://scam-link.com"
     
     print(f"Mensagem retida: '{sms_suspeito}'")
+    
+    # Classificando com o modelo local
+    sms_vetorizado = vectorizer.transform([sms_suspeito]) # Usa TD-IDF para transformar em números
+    predicao = modelo.predict(sms_vetorizado)[0]          # Prevê se é Spam ou Ham
+    resultado_modelo = "SPAM (1)" if predicao == 1 else "HAM (0)" # Se for 1 é spam, se for 0 é ham
+    print(f"Resultado do nosso modelo Local: {resultado_modelo}\n")
+    
     print("Gerando explicação...")
     
     explicacao = explain_spam_reason(sms_suspeito)

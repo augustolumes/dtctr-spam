@@ -19,8 +19,7 @@ def explain_spam_reason(mensagem: str) -> str:
             "no máximo 2 frases por que essa mensagem é suspeita.\n\n"
             f"Mensagem SMS: '{mensagem}'"
         )
-        
-        # Chamada usando o novo padrão do SDK
+
         response = client.models.generate_content(
             model='gemini-2.5-flash',
             contents=prompt,

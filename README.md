@@ -5,6 +5,13 @@
 O volume de mensagens indesejadas (Spam) em caixas de entrada e SMS é um problema crônico de segurança e produtividade. Este projeto tem como objetivo construir um classificador automático capaz de distinguir mensagens legítimas (Ham) de mensagens indesejadas (Spam). Além da triagem inicial, o sistema conta com integração a Large Language Models (LLMs) para explicar o motivo da classificação de ameaças.
  
 ---
+
+## 🎲 Dataset utilizado
+Nome do dataset: SMS Spam Collection.<br>
+Autores: Tiago Almeida, Jos Hidalgo.<br>
+Disponível em: https://archive.ics.uci.edu/ml/datasets/sms+spam+collection.<br> Acessado em: 26 jun. 2026.<br>
+
+---
  
 ## ⚙️ Instruções de Execução
  
