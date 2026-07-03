@@ -15,8 +15,8 @@ def main():
     df = load_raw_data(filepath)
     
     # 2. Pré-processamento
-    print("[2/4] Pré-processando texto e extraindo features (TF-IDF)...")
-    X_train, X_test, y_train, y_test, vectorizer = preprocess_and_vectorize(df)
+    print("[2/4] Pré-processando texto e extraindo features (Embeddings)...")
+    X_train, X_test, y_train, y_test, embedder = preprocess_and_vectorize(df)
     
     # 3. Treinamento
     print("[3/4] Treinando modelo de Regressão Logística...")
@@ -31,9 +31,9 @@ def main():
         print(f"> {metrica.capitalize()}: {valor:.4f}")
     
     # --- Persistência ---
-    print("\n[Extra] Salvando modelo e vetorizador em disco...")
-    save_model_and_vectorizer(modelo, vectorizer)
-    print("💾 Arquivos '.joblib' exportados com sucesso para a pasta 'models_saved/'!")
+    print("\n[Extra] Salvando modelo em disco...")
+    save_model_and_vectorizer(modelo, embedder)
+    print("💾 Arquivo 'modelo_lr.joblib' exportado com sucesso para a pasta 'models_saved/'!")
     # --------------------------------
         
     print("\n✅ Pipeline executado com sucesso!")
@@ -47,7 +47,7 @@ def main():
     print(f"Mensagem retida: '{sms_suspeito}'")
     
     # Classificando com o modelo local
-    sms_vetorizado = vectorizer.transform([sms_suspeito]) # Usa TD-IDF para transformar em números
+    sms_vetorizado = embedder.encode([sms_suspeito]) # Usa Transformers para transformar em números
     predicao = modelo.predict(sms_vetorizado)[0]          # Prevê se é Spam ou Ham
     resultado_modelo = "SPAM (1)" if predicao == 1 else "HAM (0)" # Se for 1 é spam, se for 0 é ham
     print(f"Resultado do nosso modelo Local: {resultado_modelo}\n")
